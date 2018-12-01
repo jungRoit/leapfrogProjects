@@ -55,42 +55,12 @@ function Bird(d) {
                     }
         }
 
+        if(birdY < 0 || birdY + birdHeight > containerHeight){
+            return true;
+        }
+
         return false;
     }
 }
 
 
-
-
-
-            // if(birdRight>= pipeLeft && birdLeft<=pipeRight
-            //  && birdTop>=pipeHeight){
-            //      return true;
-            //  }
-            //  if(birdRight>= pipeLeft && birdLeft<=pipeRight
-            //     && birdDown<=pipeTop){
-            //         return true;
-            //     }
-
-            // if (pipeList[i].appearFromTop) {
-               
-                // if (birdRight > pipeLeft && pipeHeight == that.y) {
-                //     return true;
-                // } else if (birdRight == pipeLeft && pipeHeight > that.y) {
-                //     console.log('col');
-                //     return true;
-                // } else {
-                //     return false;
-                // }
-            
-
-            // if (!pipeList[i].appearFromTop) {
-            //     
-            //     if (birdRight > pipeLeft && pipeTop == birdDown) {
-            //         return true;
-            //     } else if (birdRight == pipeLeft && pipeTop < birdTop) {
-            //         return true;
-            //     } else {
-            //         return false;
-            //     }
-            // }
