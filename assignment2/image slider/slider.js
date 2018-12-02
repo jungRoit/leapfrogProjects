@@ -140,7 +140,7 @@ function Slider(width,height) {
     }
 
     this.init = function() {
-         initSlide = setInterval(this.autoSlide,5000);
+         initSlide = setInterval(this.autoSlide,8000);
     }
 
 
@@ -176,7 +176,7 @@ function Slider(width,height) {
         prevBtn.addEventListener('click',this.slidePrev);
 
         //initializing auto slide at the beginning
-        var initSlide = setInterval(this.autoSlide,5000);
+        var initSlide = setInterval(this.autoSlide,8000);
         
 
 
