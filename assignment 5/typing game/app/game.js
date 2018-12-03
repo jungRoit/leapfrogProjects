@@ -1,4 +1,4 @@
-var wordList = ["apple","hello","tomato","purple","sizzler","dinosaur","hippopotamus","cauliflower","spongebob squarepants"]
+var wordList = ["apple","hello","tomato","purple","sizzler","dinosaur","hippopotamus","cauliflower","spongebob","squarepants"]
 
 
 var container = document.getElementById('container');
@@ -38,6 +38,11 @@ var interval = setInterval(function() {
     }
     
     if(word.checkErrorLimit()){
+        gameOverDisplay();
+        clearInterval(interval);
+    }
+
+    if(word.y >= height) {
         gameOverDisplay();
         clearInterval(interval);
     }
