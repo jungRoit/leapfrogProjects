@@ -7,6 +7,7 @@ function Word (word) {
     this.letters = this.word.split('');
     this.spanList = [];
     this.matched = [];
+    this.error = 0;
 
     var container = document.getElementById('container');
     var wordDiv = document.createElement('div');
@@ -43,10 +44,8 @@ function Word (word) {
     }
 
     this.fall = function() {
-        var interval = setInterval(function() {
             wordDiv.style.top = that.y+'px';
             that.y += that.dy;
-        },10);
     }
 
     this.checkLetter = function() {
@@ -62,8 +61,30 @@ function Word (word) {
                 that.spanList[index].style.background = 'yellow';
                 that.spanList[index].style.color = 'white';
                 that.matched.push(key);
+            }else{
+                that.error++;
             }
+            that.checkComplete();
+            that.checkErrorLimit();
+            
 
         });
+    }
+    this.checkComplete = function() {
+        if(that.matched.length === that.letters.length) {
+            return true;
+        }
+        return false;
+    }
+
+    this.checkErrorLimit = function() {
+        if(that.error === 3){
+            return true;
+        }
+        return false;
+    }
+
+    this.completed = function() {
+        container.removeChild(wordDiv);
     }
 }
