@@ -4,10 +4,9 @@ function Pipe(height, appearFromTop) {
     this.location = parseInt(container.style.width);
 
     this.x = location;
-    this.width = 80;
+    this.width = 50;
     this.height = height;
     this.appearFromTop = appearFromTop;
-
 
     var pipe = document.createElement('div');
 
@@ -39,6 +38,11 @@ function Pipe(height, appearFromTop) {
     this.move = function () {
         pipe.style.left = this.location + 'px';
         this.location -= 1;
+    }
+
+    //get Node of pipe div to remove from array
+    this.getElement = function() {
+        return pipe;
     }
 
     

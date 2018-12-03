@@ -7,8 +7,10 @@ function PipeList() {
     }
 
     this.remove = function() {
-        this.pipeList.splice(0,1);
-        container.removeChild(this.pipeList[0]);
+        for(var i = 0;i<2;i++) {
+            container.removeChild(this.pipeList[0].getElement());
+            this.pipeList.splice(0,1);
+        }       
     }
 
     this.getAll = function() {
