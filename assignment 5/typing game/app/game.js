@@ -1,4 +1,4 @@
-var wordList = ["apple","hello","tomato","purple","sizzler","dinosaur","hippopotamus","cauliflower","spongebob","squarepants"]
+var collection = ["apple","hello","tomato","purple","game","cat","heaven","silly","mountain","canvas","jacket","laptop","mango","honey","cheese","hamburger","sausage","mars","hell","throne","sizzler","dinosaur","hippopotamus","cauliflower","spongebob","squarepants"]
 
 
 var container = document.getElementById('container');
@@ -12,41 +12,69 @@ container.style.background = 'url("app/img/bg.jpg")';
 container.style.overflow = 'hidden';
 container.style.position = 'relative';
 
+
 //score and wordIndex variable
 var score = 0;
 var wordIndex = 0;
 
+ wordsList = new WordsList();
 
+var gameTime = 0;
 
-var word = new Word(wordList[wordIndex]);
+var word = new Word(collection[wordIndex]);
+wordsList.add(word);
 word.draw();
 
 word.checkLetter();
 
 
+var word1;
+
 var interval = setInterval(function() {
-    word.fall();
 
+    
+    
 
-    if(word.checkComplete()) {
-        word.completed();
-        score++;
+    if(gameTime % 100 == 0) {
         wordIndex++;
-        word = new Word(wordList[wordIndex]);
+        word = new Word(collection[wordIndex]);
+        wordsList.add(word);
         word.draw();
         word.checkLetter();
     }
-    
-    if(word.checkErrorLimit()){
-        gameOverDisplay();
-        clearInterval(interval);
+
+    for(var i = 0;i<wordsList.getAll().length;i++) {
+        wordsList.getAll()[i].fall();
+
+
+        if(wordsList.getAll()[i].checkComplete()) {
+            var node = wordsList.getAll()[i].getElement();
+            wordsList.remove(i,node);
+            score++; 
+        }
+
+        if(wordsList.getAll()[i].y >= height) {
+            gameOverDisplay();
+            clearInterval(interval);
+        }
     }
 
-    if(word.y >= height) {
-        gameOverDisplay();
-        clearInterval(interval);
-    }
-},10);
+    
+
+    // wordIndex++;
+    // word = new Word(collection[wordIndex]);
+    // word.draw();
+    // word.checkLetter();
+    
+    // if(word.checkErrorLimit()){
+    //     gameOverDisplay();
+    //     clearInterval(interval);
+    // }
+
+   
+
+    gameTime++;
+},20);
 
 
 function gameOverDisplay() {

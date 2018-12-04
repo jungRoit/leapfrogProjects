@@ -1,15 +1,17 @@
 function Word (word) {
-    this.x = 300;
-    this.y = 0;
+    var container = document.getElementById('container');
     var that = this;
     this.word = word;
     this.dy = 1;
     this.letters = this.word.split('');
     this.spanList = [];
     this.matched = [];
-    this.error = 0;
+    this.enabled = true;
+    // this.error = 0;
+    this.x = Math.ceil(Math.random()* (parseInt(container.style.width) - (this.letters.length * 50)));
+    this.y = 0;
 
-    var container = document.getElementById('container');
+    
     var wordDiv = document.createElement('div');
 
     // this.getLetters = function() {
@@ -23,10 +25,10 @@ function Word (word) {
         for(var i = 0; i<this.letters.length;i++) {
             var letter = document.createElement('span');
             letter.innerHTML = this.letters[i];
-            letter.style.width = '30px';
-            letter.style.height = '30px';
+            letter.style.width = '10px';
+            letter.style.height = '10px';
             letter.style.background = 'gray';
-            letter.style.padding = '20px';
+            letter.style.padding = '5px';
             letter.style.marginRight = '10px';
             wordDiv.appendChild(letter);
             that.spanList.push(letter);
@@ -50,6 +52,9 @@ function Word (word) {
 
     this.checkLetter = function() {
         document.addEventListener('keydown',function(evt){
+
+            that.checkComplete();
+            
             var key = evt.keyCode;
 
             var noOfLetter = that.letters.length;
@@ -64,8 +69,8 @@ function Word (word) {
             }else{
                 that.error++;
             }
-            that.checkComplete();
-            that.checkErrorLimit();
+            
+            // that.checkErrorLimit();
             
 
         });
@@ -84,7 +89,12 @@ function Word (word) {
         return false;
     }
 
-    this.completed = function() {
-        container.removeChild(wordDiv);
+    // this.completed = function(div) {
+    //     container.removeChild(div);
+    //     WordsList.remove(that);
+    // }
+
+    this.getElement = function() {
+        return wordDiv;
     }
 }
