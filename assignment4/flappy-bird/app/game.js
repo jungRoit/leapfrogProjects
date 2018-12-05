@@ -1,7 +1,7 @@
 var container = document.getElementById('container');
 
-var width = 1000;
-var height = 600;
+var width = 800;
+var height = 500;
 
 container.style.width = width+'px';
 container.style.height = height+'px';
@@ -25,21 +25,9 @@ var brd = new Bird();
 brd.draw();
 brd.move();
 
-var pipeHeight = Math.ceil(Math.random()*(height-100));
-
-// var pipe = new Pipe(pipeHeight,true);
-// pipe.draw();
-
-// var pipe2 = new Pipe(height-(pipeHeight+100),false);
-// pipe2.draw();
-
 
 
 pipeList = new PipeList();
-
-// pipeList.add(pipe);
-// pipeList.add(pipe2);
-
 
 var pressed = false;
 var pipeCounter = 0;
@@ -80,9 +68,22 @@ var initializeGame = setInterval(function() {
         var highScoreHeading = document.createElement('h3');
         highScoreHeading.textContent = "High Score: "+ localStorage.getItem('highScore');
 
+
+        var restartBtn = document.createElement('button');
+        restartBtn.style.height = '100px';
+        restartBtn.style.width = '100px';
+        restartBtn.textContent = 'Play Again';
+
+        restartBtn.addEventListener('click', function () {
+            location.reload();
+        });
+
+            
+
         gameOver.appendChild(Heading);
         gameOver.appendChild(scoreHeading);
         gameOver.appendChild(highScoreHeading);
+        gameOver.appendChild(restartBtn);
         
         container.appendChild(gameOver);
         clearInterval(initializeGame);
@@ -90,13 +91,13 @@ var initializeGame = setInterval(function() {
 
         brd.move();
        
-        pipeHeight = Math.ceil(Math.random()*(height-100));
+        var pipeHeight = Math.ceil(Math.random()*(height-100));
         if(pipeCounter % 500 == 0) {
           var  pipe = new Pipe(pipeHeight,true);
             pipe.draw();
             pipeList.add(pipe);
             
-            var pipe2 = new Pipe(height-(pipeHeight+100),false);
+            var pipe2 = new Pipe(pipeHeight,false);
             pipe2.draw();
             pipeList.add(pipe2);
         }
@@ -120,18 +121,9 @@ var initializeGame = setInterval(function() {
       
     
         document.addEventListener('keydown',function(){
-            pressed = true;
+           brd.update();
         });
     
-        document.addEventListener('keyup',function(){
-            pressed = false;
-        });
-    
-       if(pressed == true){
-        brd.changeDirection(-brd.dy);
-       }else{
-        brd.changeDirection(brd.dy*3);
-       }
 
      pipeCounter ++;
 
